@@ -77,7 +77,7 @@ for idx in range(len(models)):
 plt.legend()
 
 
-rs = np.linspace(0, 0.0001, 1000)
+rs = np.linspace(0, 0.0001, 100)
 
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
@@ -110,9 +110,9 @@ def surface_plot(N, G):
     for (nn, gg) in zip(N, G):
         z = []
         for (n, g) in zip(nn, gg):
-            z.append(grain_models_fine[n](g)/X_scale)
+            z.append(np.array(grain_models_fine[n](g)/X_scale))
         result.append(z)
-    return result
+    return np.array(result)
 
 
 XX, YY = np.meshgrid(nn, rs[1:])
@@ -129,6 +129,6 @@ ax.set_zlim(0)
 ax.zaxis.set_major_locator(LinearLocator(15))
 ax.zaxis.set_major_formatter(FormatStrFormatter(r'$ 10^6 \cdot %.02f$'))
 
-fig.colorbar(surf, shrink=0.5, aspect=5)
+#fig.colorbar(surf, shrink=0.5, aspect=5)
 
 plt.show()
